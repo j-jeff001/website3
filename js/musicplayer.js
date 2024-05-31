@@ -5,6 +5,9 @@ const audio = document.getElementById('audio')
 const cover = document.getElementById('cover')
 const progress = document.getElementById('progress')
 const progressContainer = document.getElementById('progress-container')
+//const nextbtn = document.getElementById("btn").addEventListener('click', forwardSong)
+
+
 
 //songs titles
 const songs = ['hey', 'summer', 'ukulele']
@@ -36,19 +39,28 @@ function pauseSong() {
     playBtn.querySelector('i.fas').classList.remove('fa-pause')
 }
 
+//forward song
+function forwardSong() {
+    musicContainer.classList.remove('play')
+    audio.next()
+    playBtn.querySelector('i.fas').classList.add('fa-forward')
+    playBtn.querySelector('i.fas').classList.remove('fa-pause', 'fa-play')
+}
+
+//progress bar
 function updateProgress(e) {
     const {duration, currentTime} = e.srcElement
     const progressPercent = (currentTime/duration) * 100
-    progress.style.width = `$(progressPercent)%`
-    console.log(setProgress)
+    progress.style.width = `${progressPercent}%`
+    
 }
 
-function setProgress (e) {
+function setProgress(e) {
     const width = this.clientWidth 
     const clickX = e.offsetX;
     const duration = audio.duration
 
-    audio.currentTime = clickX/width * duration
+    audio.currentTime = clickX / width * duration
 }
 
 //EVENT LISTERS
